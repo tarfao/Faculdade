@@ -1,0 +1,6 @@
+Existem 3 formas de fazer com que um servidor tenha um identificador 
+para cada conexão, as formas são multiplexação(multiplexing, fork, threads)
+
+O fork() faz um duplicata do programa, tendo um processo pai que organiza todos.
+
+Fazer a junção, estartar o processo pai e de um servidor com fork, e servidores filhos com threads

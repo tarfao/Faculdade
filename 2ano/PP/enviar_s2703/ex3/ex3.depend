@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1490367966 source:c:\users\tarfa\onedrive\documentos\facul\2 ano\pp\exercicios\enviar_s2703\ex3\main.cpp
+	<iostream>
+
+1490368002 source:c:\users\tarfa\onedrive\documentos\facul\1 ano\aed\testes\imprime.argv\main.c
+	<stdio.h>
+	<stdlib.h>
+
