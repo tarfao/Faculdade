@@ -4,21 +4,22 @@ PARAMETROS:
 RETORNO:
 ------------------------------------------------------------------------------*/
 
-typedef struct ar{
-	int32_t chave:28;
-	int32_t bal:2;
-	int32_t reservado:2;
+typedef struct ar
+{
+	int32_t chave : 28;
+	int32_t bal : 2;
+	int32_t reservado : 2;
 	struct ar *esq;
 	struct ar *dir;
-}A_NO;
+} A_NO;
 
 typedef struct s_arq_no
 {
-    int32_t chave:28;
-    int32_t bal:2;
-    uint32_t esq:1;
-    uint32_t dir:1;
-}A_NO_ARQ;
+	int32_t chave : 28;
+	int32_t bal : 2;
+	uint32_t esq : 1;
+	uint32_t dir : 1;
+} A_NO_ARQ;
 
 /*----------------------------------------------------------------------------
 OBJETIVO: DESENHAR O CÍRCULO DA ÁRVORE
@@ -28,13 +29,12 @@ PARÂMETROS: c - CHAVE DO NÓ
 -----------------------------------------------------------------------------*/
 void Draw_Seta(int x, int y)
 {
-	gfx_set_color(255,0,0);
-	gfx_line(x-10,y+15,x+10,y-15);
-	gfx_line(x-10,y-15,x+10,y+15);
+	gfx_set_color(255, 0, 0);
+	gfx_line(x - 10, y + 15, x + 10, y - 15);
+	gfx_line(x - 10, y - 15, x + 10, y + 15);
 	gfx_paint();
 	sleep(1.5);
 }
-
 
 /*------------------------------------------------------------------------
 OBJETIVO: BUSCAR UM NO NA ARVORE
@@ -48,10 +48,10 @@ void Busca_ARB(A_NO *pt, int32_t x, int dx, int dy, int l)
 {
 	int x1;
 
-	x1 = (l - dx)/2;
+	x1 = (l - dx) / 2;
 
-	if(x1<0)
-		x1 = x1*(-1);
+	if (x1 < 0)
+		x1 = x1 * (-1);
 
 	if (pt == NULL)
 	{
@@ -59,26 +59,26 @@ void Busca_ARB(A_NO *pt, int32_t x, int dx, int dy, int l)
 	}
 	else
 	{
-		if(x == pt->chave)
+		if (x == pt->chave)
 		{
-			Draw_Seta(dx,dy);
+			Draw_Seta(dx, dy);
 		}
 		else
 		{
-			if( x < pt->chave )
+			if (x < pt->chave)
 			{
-				if ( pt->esq != NULL)
+				if (pt->esq != NULL)
 				{
 					pt = pt->esq;
-					Busca_ARB(pt,x,dx-x1,dy+50,dx);
+					Busca_ARB(pt, x, dx - x1, dy + 50, dx);
 				}
 			}
 			else
 			{
-				if(pt->dir != NULL)
+				if (pt->dir != NULL)
 				{
 					pt = pt->dir;
-					Busca_ARB(pt,x,dx+x1,dy+50,dx);
+					Busca_ARB(pt, x, dx + x1, dy + 50, dx);
 				}
 			}
 		}
@@ -97,7 +97,7 @@ void caso1(A_NO **rz, int32_t *h)
 
 	ptu = (*rz)->esq;
 
-	if(ptu->bal == -1)
+	if (ptu->bal == -1)
 	{
 		(*rz)->esq = ptu->dir;
 		ptu->dir = *rz;
@@ -113,12 +113,12 @@ void caso1(A_NO **rz, int32_t *h)
 		(*rz)->esq = ptv->dir;
 		ptv->dir = *rz;
 
-		if(ptv->bal == -1)
+		if (ptv->bal == -1)
 			(*rz)->bal = 1;
 		else
 			(*rz)->bal = 0;
 
-		if(ptv->bal == 1)
+		if (ptv->bal == 1)
 			ptu->bal = -1;
 		else
 			ptu->bal = 0;
@@ -135,12 +135,12 @@ OBJETIVO: 	FAZER UMA ROTAÇÃO ESQUERDA OU DUPLA ESQUERDA
 PARAMETROS:	rz - RAIZ DA ÁRVORE
 			h - VALIDADOR
 ------------------------------------------------------------------------------*/
-void caso2 (A_NO **rz, int32_t *h)
+void caso2(A_NO **rz, int32_t *h)
 {
 	A_NO *ptu = (*rz)->dir;
 	A_NO *ptv = ptu->esq;
 
-	if(ptu->bal == 1)
+	if (ptu->bal == 1)
 	{
 		(*rz)->dir = ptu->esq;
 		ptu->esq = *rz;
@@ -154,12 +154,12 @@ void caso2 (A_NO **rz, int32_t *h)
 		(*rz)->dir = ptv->esq;
 		ptv->esq = *rz;
 
-		if(ptv->bal == 1)
+		if (ptv->bal == 1)
 			(*rz)->bal = -1;
 		else
 			(*rz)->bal = 0;
 
-		if(ptv->bal == -1)
+		if (ptv->bal == -1)
 			ptu->bal = 1;
 		else
 			ptu->bal = 0;
@@ -178,9 +178,9 @@ PARAMETROS:	rz - RAIZ DA ÁRVORE
 void Insrer_ARB(A_NO **rz, int32_t x, int32_t *h)
 {
 
-	if(*rz == NULL)
+	if (*rz == NULL)
 	{
-		
+
 		assert(((*rz) = malloc(sizeof(A_NO))) != NULL);
 		(*rz)->chave = x;
 		(*rz)->esq = NULL;
@@ -190,7 +190,7 @@ void Insrer_ARB(A_NO **rz, int32_t x, int32_t *h)
 	}
 	else
 	{
-		if(x == (*rz)->chave)
+		if (x == (*rz)->chave)
 		{
 			printf("CHAVE JA ESTA CONTIDA!!\n");
 			*h = 0;
@@ -200,21 +200,21 @@ void Insrer_ARB(A_NO **rz, int32_t x, int32_t *h)
 			if (x < (*rz)->chave)
 			{
 				Insrer_ARB(&(*rz)->esq, x, h);
-				if(*h == 1)
+				if (*h == 1)
 				{
-					switch((*rz)->bal)
+					switch ((*rz)->bal)
 					{
-						case 1:
-							(*rz)->bal = 0;
-							*h = 0;
+					case 1:
+						(*rz)->bal = 0;
+						*h = 0;
 						break;
 
-						case 0:
-							(*rz)->bal = -1;
+					case 0:
+						(*rz)->bal = -1;
 						break;
 
-						case -1:
-							caso1(rz,h);
+					case -1:
+						caso1(rz, h);
 						break;
 					}
 				}
@@ -222,27 +222,26 @@ void Insrer_ARB(A_NO **rz, int32_t x, int32_t *h)
 			else
 			{
 				Insrer_ARB(&((*rz)->dir), x, h);
-				if(*h == 1)
+				if (*h == 1)
 				{
-					switch((*rz)->bal)
+					switch ((*rz)->bal)
 					{
-						case 1:
-							caso2(rz,h);
+					case 1:
+						caso2(rz, h);
 						break;
 
-						case 0:
-							(*rz)->bal = 1;
+					case 0:
+						(*rz)->bal = 1;
 						break;
 
-						case -1:
-							(*rz)->bal = 0;
-							*h = 0;
+					case -1:
+						(*rz)->bal = 0;
+						*h = 0;
 						break;
 					}
 				}
 			}
 		}
-		
 	}
 }
 
@@ -253,12 +252,15 @@ RETORNO: 	NENHUM
 ------------------------------------------------------------------------------*/
 void Imprime_NO(A_NO *pt)
 {
-	printf("%d ",pt->chave);
+	if (pt != NULL)
+	{
+		printf("%d ", pt->chave);
 
-	if(pt->esq != NULL)
-		Imprime_NO(pt->esq);
-	if(pt->dir != NULL)
-		Imprime_NO(pt->dir);
+		if (pt->esq != NULL)
+			Imprime_NO(pt->esq);
+		if (pt->dir != NULL)
+			Imprime_NO(pt->dir);
+	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -266,13 +268,12 @@ OBJETIVO:   DESALOCAR OS NÓS DA ÁRVORE (PRÉ ORDEM)
 PARAMETROS:	A RAIZ DA ARVORE
 RETORNO: 	NENHUM
 ------------------------------------------------------------------------------*/
-void Desaloca_Arv (A_NO *pt)
+void Desaloca_Arv(A_NO *pt)
 {
-	if(pt->esq != NULL)
+	if (pt->esq != NULL)
 		Desaloca_Arv(pt->esq);
-	if(pt->dir != NULL)
+	if (pt->dir != NULL)
 		Desaloca_Arv(pt->dir);
 
 	free(pt);
 }
-

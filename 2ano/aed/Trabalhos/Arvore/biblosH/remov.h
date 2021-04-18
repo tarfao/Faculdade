@@ -11,7 +11,7 @@ void caso1R(A_NO **rz, int* h)
 	A_NO *ptv;
 
 	ptu = (*rz)->esq;
-
+	printf("antes caso1R");
 	if(ptu->bal == 0 || ptu->bal == -1)
 	{
 		(*rz)->esq = ptu->dir;
@@ -49,6 +49,7 @@ void caso1R(A_NO **rz, int* h)
 		*rz = ptv;
         *h = 0;
 	}
+	printf("Depois caso1R");
 }
 
 /*-----------------------------------------------------------------------------
@@ -108,7 +109,7 @@ void Antecessor(A_NO **rz, A_NO **ant, int *h)
     if ((*rz)->dir == NULL)
     {
         (*ant) = *rz;
-        *rz = NULL;
+        //*rz = NULL;
         *h = 1;
     }
     else
@@ -142,7 +143,7 @@ PARAMETROS:	rz - RAIZ DA ÁRVORE
 ------------------------------------------------------------------------------*/
 void Remov_ARV(A_NO **rz, int32_t x, int32_t *h)
 {
-	A_NO *del, *pred=NULL; /**pred, *pai; nó que sera deletado e o predecessor*/
+	A_NO *del, *antecessor=NULL; /**pred, *pai; nó que sera deletado e o predecessor*/
 
 	if(*rz == NULL)
 	{
@@ -163,15 +164,15 @@ void Remov_ARV(A_NO **rz, int32_t x, int32_t *h)
 			{
 				if((*rz)->esq != NULL)
 				{
-					Antecessor(&(*rz)->esq,&pred,h); /*obtem o antecessor do número a ser deletado*/
-					if(pred == (*rz)->esq)
+					Antecessor(&(*rz)->esq,&antecessor,h); /*obtem o antecessor do número a ser deletado*/
+					if(antecessor == (*rz)->esq)
 					{
-						pred->dir = (*rz)->dir;
+						antecessor->dir = (*rz)->dir;
 					}
 					else
 					{
-                    	pred->esq = (*rz)->esq;
-						pred->dir = (*rz)->dir;
+                    	antecessor->esq = (*rz)->esq;
+						antecessor->dir = (*rz)->dir;
 					}
 
 					switch((*rz)->bal)
@@ -181,14 +182,14 @@ void Remov_ARV(A_NO **rz, int32_t x, int32_t *h)
 						break;
 
 						case 0:
-							pred->bal = 1;
+							antecessor->bal = 1;
 						break;
 
 						case -1:
-							pred->bal = 0;
+							antecessor->bal = 0;
 						break;
 					}
-					(*rz) = pred;
+					(*rz) = antecessor;
 
 				}
 				else

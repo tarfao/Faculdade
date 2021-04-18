@@ -22,7 +22,7 @@ int main (int argc, char *argv[])
 	do
 	{
 		gfx_clear();
-		//printf("Menu\n");
+		printf("Menu\n");
 		Draw_Arv(raiz,650,50,20,1300);
 		gfx_paint();
 		printf("\n-----------------------------\nArvore = ");
@@ -48,6 +48,7 @@ int main (int argc, char *argv[])
 			case 2:
 				system("clear");
 				printf("\nNumero: ");
+				printf("raiz = %d, deletado = %d, balancemento = %d .\n", raiz->chave, n);
 				scanf("%d",&n);
 				Remov_ARV(&raiz, n, &h);
 			break;
@@ -60,7 +61,7 @@ int main (int argc, char *argv[])
 			break;
 		}
 	}while(op != 4);
-	gfx_quit();
+	//gfx_quit();
 	if(raiz != NULL)
 		Desaloca_Arv(raiz);
 	return 0;
