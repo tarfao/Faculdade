@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1478227463 source:c:\users\tarfa\documents\aed\t's\t11\insere_carro\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<time.h>
-	<locale.h>
-
